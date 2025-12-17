@@ -1,0 +1,82 @@
+"use client"
+
+import { useState } from "react"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
+import { Menu, X, Github } from "lucide-react"
+
+export function Navbar() {
+  const [isOpen, setIsOpen] = useState(false)
+
+  return (
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/80 backdrop-blur-md border-b border-border">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16">
+          <div className="flex items-center gap-2">
+            <div className="w-8 h-8 rounded-lg bg-primary flex items-center justify-center">
+              <span className="text-primary-foreground font-bold text-sm">PP</span>
+            </div>
+            <span className="font-semibold text-lg text-foreground">Protein Pilot</span>
+          </div>
+
+          <div className="hidden md:flex items-center gap-8">
+            <Link href="#features" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              Features
+            </Link>
+            <Link
+              href="#transparency"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Transparency
+            </Link>
+            <Link href="#compare" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
+              Compare
+            </Link>
+            <Link
+              href="#testimonials"
+              className="text-sm text-muted-foreground hover:text-foreground transition-colors"
+            >
+              Reviews
+            </Link>
+          </div>
+
+          <div className="hidden md:flex items-center gap-3">
+            <Button variant="ghost" size="sm" asChild>
+              <Link href="https://github.com" target="_blank" className="flex items-center gap-2">
+                <Github className="w-4 h-4" />
+                <span className="text-xs bg-primary/10 text-primary px-2 py-0.5 rounded-full">Live</span>
+              </Link>
+            </Button>
+            <Button size="sm">Buy Now</Button>
+          </div>
+
+          <button className="md:hidden p-2" onClick={() => setIsOpen(!isOpen)}>
+            {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+          </button>
+        </div>
+      </div>
+
+      {isOpen && (
+        <div className="md:hidden bg-background border-b border-border">
+          <div className="px-4 py-4 space-y-3">
+            <Link href="#features" className="block text-sm text-muted-foreground hover:text-foreground">
+              Features
+            </Link>
+            <Link href="#transparency" className="block text-sm text-muted-foreground hover:text-foreground">
+              Transparency
+            </Link>
+            <Link href="#compare" className="block text-sm text-muted-foreground hover:text-foreground">
+              Compare
+            </Link>
+            <Link href="#testimonials" className="block text-sm text-muted-foreground hover:text-foreground">
+              Reviews
+            </Link>
+            <Button className="w-full" size="sm">
+              Buy Now
+            </Button>
+          </div>
+        </div>
+      )}
+    </nav>
+  )
+}
